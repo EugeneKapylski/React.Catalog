@@ -1,0 +1,29 @@
+{
+  "name": "catalog",
+  "version": "0.1.0",
+  "homepage": "https://github.com/EugeneKapylski/React.Catalog",
+  "authors": [
+    "Evgeny.Kapylsky <Evgeny.Kapylsky@itechart-group.com>"
+  ],
+  "keywords": [
+    "react",
+    "flux"
+  ],
+  "description": "online catalog",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "lodash": "~3.10.1",
+    "react": "~0.13.3"
+  },
+  "devDependencies": {
+    "flux": "~2.1.1"
+  }
+}

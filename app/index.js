@@ -4,7 +4,6 @@
 //var CatalogApp = require('components/catalog-app');
 $ = jQuery = require('jquery');
 var React = require('react');
-
 //React.render(<CatalogApp/>, document.getElementById('catalog-app'));
 
 var Hello = React.createClass({

@@ -10,6 +10,7 @@ var source = require('vinyl-source-stream'); // Used to stream bundle for furthe
 var browserify = require('browserify'); // Bundles JS
 var reactify = require('reactify'); //Transforms React JSX to JS
 var concat = require('gulp-concat'); //Concatenates files
+var lint = require('gulp-eslint'); //Lints JS files, including JSX
 
 var config = {
     port: 1180,
@@ -24,7 +25,7 @@ var config = {
         js: './app/*.js',
         externalLibraries: [
             './bower_components/jquery/dist/jquery.min.js',
-            './bower_components/react/react.min.js'
+            './bower_components/react/react.js'
         ],
         libs: '/scripts/libs'
     }
@@ -80,9 +81,15 @@ gulp.task('open', ['connect'], function() {
     );
 });
 
-gulp.task('watch', function(){
-    gulp.watch(config.paths.html, ['html']);
-    gulp.watch(config.paths.js, ['js']);
+gulp.task('lint', function() {
+    return gulp.src(config.paths.js)
+        .pipe(lint({config: 'eslint.config.json'}))
+        .pipe(lint.format());
 });
 
-gulp.task('default', ['html', 'css', 'js', 'open', 'watch']);
+gulp.task('watch', function(){
+    gulp.watch(config.paths.html, ['html']);
+    gulp.watch(config.paths.js, ['js', 'lint']);
+});
+
+gulp.task('default', ['html', 'css', 'js', 'lint', 'open', 'watch']);

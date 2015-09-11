@@ -20,10 +20,8 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.5",
-    "lodash": "~3.10.1",
-    "react": "~0.13.3"
+    "lodash": "~3.10.1"
   },
   "devDependencies": {
-    "flux": "~2.1.1"
   }
 }

@@ -8,7 +8,8 @@ var open = require('gulp-open'); //Runs a local dev server
 var connect = require('gulp-connect'); //Opens a URL in a web browser
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling etc.
 var browserify = require('browserify'); // Bundles JS
-var reactify = require('reactify'); //Transform React JSX to JS
+var reactify = require('reactify'); //Transforms React JSX to JS
+var concat = require('gulp-concat'); //Concatenates files
 
 var config = {
     port: 1180,
@@ -16,8 +17,16 @@ var config = {
     paths: {
         build: './build',
         html: './app/*.html',
+        css: [
+            'bower_components/bootstrap/dist/css/bootstrap.min.css',
+            'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
+        ],
         js: './app/*.js',
-        libs: 'libs'
+        externalLibraries: [
+            './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/react/react.min.js'
+        ],
+        libs: '/scripts/libs'
     }
 };
 
@@ -25,6 +34,12 @@ gulp.task('html', function() {
     gulp.src(config.paths.html)
         .pipe(gulp.dest(config.paths.build))
         .pipe(connect.reload());
+});
+
+gulp.task('css', function() {
+    gulp.src(config.paths.css)
+        .pipe(concat('bundle.css'))
+        .pipe(gulp.dest(config.paths.build + '/css'));
 });
 
 gulp.task('js', ['external-libraries'], function() {
@@ -38,15 +53,13 @@ gulp.task('js', ['external-libraries'], function() {
     })
     .bundle() // Create the initial bundle when starting the task
     .pipe(source('app.js'))
-    .pipe(gulp.dest(config.paths.build))
+    .pipe(gulp.dest(config.paths.build + '/scripts'))
     .pipe(connect.reload());
 });
 
 gulp.task('external-libraries', function() {
-    gulp.src([
-        './bower_components/react/react.js'
-    ])
-    .pipe(gulp.dest(config.paths.build + '/libs'));
+    gulp.src(config.paths.externalLibraries)
+    .pipe(gulp.dest(config.paths.build + config.paths.libs));
 });
 
 gulp.task('connect', function() {
@@ -72,4 +85,4 @@ gulp.task('watch', function(){
     gulp.watch(config.paths.js, ['js']);
 });
 
-gulp.task('default', ['js', 'html', 'open', 'watch']);
+gulp.task('default', ['html', 'css', 'js', 'open', 'watch']);

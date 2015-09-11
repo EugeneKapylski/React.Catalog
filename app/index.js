@@ -2,7 +2,7 @@
 // * Created by Evgeny.Kapylsky on 9/8/2015.
 // */
 //var CatalogApp = require('components/catalog-app');
-
+$ = jQuery = require('jquery');
 var React = require('react');
 
 //React.render(<CatalogApp/>, document.getElementById('catalog-app'));

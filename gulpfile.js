@@ -79,4 +79,8 @@ gulp.task("html", function() {
         .pipe(connect.reload());
 });
 
-gulp.task('default', ['copy-libraries', 'browserify', 'html', 'open']);
+gulp.task("watch", function(){
+    gulp.watch(config.paths.html, ['html']);
+});
+
+gulp.task('default', ['copy-libraries', 'browserify', 'html', 'open', 'watch']);

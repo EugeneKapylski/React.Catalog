@@ -22,7 +22,7 @@ var config = {
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
             'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
         ],
-        js: './app/*.js',
+        js: './app/**/*.js',
         externalLibraries: [
             './bower_components/jquery/dist/jquery.min.js',
             './bower_components/react/react.js'

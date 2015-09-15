@@ -4,14 +4,16 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var PhoneList = React.createClass({
     render: function() {
         var createPhoneRow = function (phone) {
           return (
               <tr key={phone.id}>
-                <td><a href={"/#phones/" + phone.id}>{phone.id}</a></td>
-                <td><a href={"/#phones/" + phone.id}>{phone.manufacturer}</a></td>
+                <td><Link to="phone" params={{phoneId: phone.id}}>{phone.id}</Link></td>
+                <td><Link to="phone" params={{phoneId: phone.id}}>{phone.manufacturer}</Link></td>
               </tr>
           );
         };

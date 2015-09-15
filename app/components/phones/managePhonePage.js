@@ -7,6 +7,7 @@ var React = require('react');
 var Router = require('react-router');
 var PhoneForm = require('./phoneForm');
 var PhoneApi = require('../../api/phoneApi');
+var toastr = require('toastr');
 
 var ManagePhonePage = React.createClass({
     mixins: [
@@ -27,9 +28,10 @@ var ManagePhonePage = React.createClass({
 
         return this.setState({phone: this.state.phone});
     },
-    savePhone: function(event) {
+    savePhoneItem: function(event) {
         event.preventDefault();
         PhoneApi.savePhone(this.state.phone);
+        toastr.success("Phone item saves");
         this.transitionTo('phones');
     },
     render: function() {
@@ -37,7 +39,7 @@ var ManagePhonePage = React.createClass({
             <PhoneForm
                 phone={this.state.phone}
                 onChange={this.setPhoneState}
-                onSave={this.savePhone} />
+                onSave={this.savePhoneItem} />
         );
     }
 });

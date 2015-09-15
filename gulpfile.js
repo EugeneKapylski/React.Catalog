@@ -20,7 +20,8 @@ var config = {
         html: './app/*.html',
         css: [
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
+            'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+            'node_modules/toastr/build/toastr.css'
         ],
         js: './app/**/*.js',
         externalLibraries: [

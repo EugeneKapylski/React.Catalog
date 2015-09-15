@@ -15,31 +15,50 @@ var ManagePhonePage = React.createClass({
     ],
     getInitialState: function() {
         return {
-            phone: {
+            phoneItem: {
                 id: '',
                 manufacturer: ''
-            }
+            },
+            errors: {}
         };
     },
     setPhoneState: function(event) {
         var field = event.target.name;
         var value = event.target.value;
-        this.state.phone[field] = value;
+        this.state.phoneItem[field] = value;
 
-        return this.setState({phone: this.state.phone});
+        return this.setState({phoneItem: this.state.phoneItem});
+    },
+    phoneFormIsValid: function() {
+        var formIsValid = true;
+        this.state.errors = {};//clear any previous errors.
+
+        if (this.state.phoneItem.manufacturer.length === 0) {
+            this.state.errors.manufacturer = 'Manufacturer is a required field.';
+            formIsValid = false;
+        }
+        this.setState({errors: this.state.errors});
+
+        return formIsValid;
     },
     savePhoneItem: function(event) {
         event.preventDefault();
-        PhoneApi.savePhone(this.state.phone);
+
+        if(!this.phoneFormIsValid()) {
+            return;
+        }
+
+        PhoneApi.savePhone(this.state.phoneItem);
         toastr.success("Phone item saves");
         this.transitionTo('phones');
     },
     render: function() {
         return (
             <PhoneForm
-                phone={this.state.phone}
+                phoneItem={this.state.phoneItem}
                 onChange={this.setPhoneState}
-                onSave={this.savePhoneItem} />
+                onSave={this.savePhoneItem}
+                errors={this.state.errors} />
         );
     }
 });

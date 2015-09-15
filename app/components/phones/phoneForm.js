@@ -7,6 +7,12 @@ var React = require('react');
 var Input = require('../common/textInput');
 
 var PhoneForm = React.createClass({
+    propTypes: {
+        phoneItem: React.PropTypes.object.isRequired,
+        onSave: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+        errors: React.PropTypes.object
+    },
     render: function() {
         return (
             <form>
@@ -14,8 +20,9 @@ var PhoneForm = React.createClass({
                 <Input
                     name="manufacturer"
                     label="Manufacturer"
-                    value={this.props.phone.manufacturer}
-                    onChange={this.props.onChange} />
+                    value={this.props.phoneItem.manufacturer}
+                    onChange={this.props.onChange}
+                    error={this.props.errors.manufacturer} />
                 <br />
                 <input
                     type="submit"

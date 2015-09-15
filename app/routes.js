@@ -16,6 +16,7 @@ var routes = (
         <DefaultRoute handler={require('./components/homePage')}/>
         <Route name="phones" handler={require('./components/phones/phonePage')}/>
         <Route name="addMobilePhone" path="phone" handler={require('./components/phones/managePhonePage')}/>
+        <Route name="editMobilePhoneItem" path="phone/:id" handler={require('./components/phones/managePhonePage')}/>
         <NotFoundRoute handler={require('./components/notFoundPage')}/>
         <Redirect from="mobile-phones" to="phones" />
     </Route>

@@ -13,16 +13,32 @@ var ManagePhonePage = React.createClass({
     mixins: [
         Router.Navigation
     ],
+    statics: {
+        willTransitionFrom: function(transition, component) {
+            if(component.state.dirty && !confirm('Leave without saving?')) {
+                transition.abort();
+            }
+        }
+    },
     getInitialState: function() {
         return {
             phoneItem: {
                 id: '',
                 manufacturer: ''
             },
-            errors: {}
+            errors: {},
+            dirty: false
         };
     },
+    componentWillMount: function() {
+        var phoneId = this.props.params.id;//from the path '/phone:id'
+
+        if(phoneId) {
+            this.setState({phoneItem: PhoneApi.getPhoneById(parseInt(phoneId, 10))});
+        }
+    },
     setPhoneState: function(event) {
+        this.setState({dirty: true});
         var field = event.target.name;
         var value = event.target.value;
         this.state.phoneItem[field] = value;
@@ -49,6 +65,7 @@ var ManagePhonePage = React.createClass({
         }
 
         PhoneApi.savePhone(this.state.phoneItem);
+        this.setState({dirty: false});
         toastr.success("Phone item saves");
         this.transitionTo('phones');
     },

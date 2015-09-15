@@ -4,7 +4,7 @@
 "user strict";
 
 var React = require('react');
-var Input = require('./components/common/textInput');
+var Input = require('../common/textInput');
 
 var PhoneForm = React.createClass({
     render: function() {
@@ -12,12 +12,16 @@ var PhoneForm = React.createClass({
             <form>
                 <h1>Manage Phone</h1>
                 <Input
-                    name="manufacture"
+                    name="manufacturer"
                     label="Manufacturer"
                     value={this.props.phone.manufacturer}
                     onChange={this.props.onChange} />
                 <br />
-                <input type="submit" value="Save" className="btn btn-default" />
+                <input
+                    type="submit"
+                    value="Save"
+                    className="btn btn-default"
+                    onClick={this.props.onSave}/>
             </form>
         );
     }

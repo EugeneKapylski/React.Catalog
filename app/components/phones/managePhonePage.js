@@ -5,6 +5,7 @@
 
 var React = require('react');
 var PhoneForm = require('./phoneForm');
+var PhoneApi = require('../../api/phoneApi');
 
 var ManagePhonePage = React.createClass({
     getInitialState: function() {
@@ -22,11 +23,17 @@ var ManagePhonePage = React.createClass({
 
         return this.setState({phone: this.state.phone});
     },
+    savePhone: function(event) {
+        event.preventDefault();
+        PhoneApi.savePhone(this.state.phone);
+
+    },
     render: function() {
         return (
             <PhoneForm
                 phone={this.state.phone}
-                onChange={this.setPhoneState} />
+                onChange={this.setPhoneState}
+                onSave={this.savePhone} />
         );
     }
 });

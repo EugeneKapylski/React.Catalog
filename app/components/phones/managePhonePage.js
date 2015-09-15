@@ -4,10 +4,14 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
 var PhoneForm = require('./phoneForm');
 var PhoneApi = require('../../api/phoneApi');
 
 var ManagePhonePage = React.createClass({
+    mixins: [
+        Router.Navigation
+    ],
     getInitialState: function() {
         return {
             phone: {
@@ -26,7 +30,7 @@ var ManagePhonePage = React.createClass({
     savePhone: function(event) {
         event.preventDefault();
         PhoneApi.savePhone(this.state.phone);
-
+        this.transitionTo('phones');
     },
     render: function() {
         return (

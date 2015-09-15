@@ -9,6 +9,7 @@ var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.Redirect;
 
 var routes = (
     <Route name="app" path="/" handler={require('./components/app')}>
@@ -16,6 +17,7 @@ var routes = (
         <Route name="phones" handler={require('./components/phones/phonePage')}/>
         <Route name="phone" handler={require('./components/phones/phonePage')}/>
         <NotFoundRoute handler={require('./components/notFoundPage')}/>
+        <Redirect from="mobile-phones" to="phones" />
     </Route>
 );
 

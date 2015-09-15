@@ -12,8 +12,8 @@ var PhoneList = React.createClass({
         var createPhoneRow = function (phone) {
           return (
               <tr key={phone.id}>
-                <td><Link to="phone" params={{phoneId: phone.id}}>{phone.id}</Link></td>
-                <td><Link to="phone" params={{phoneId: phone.id}}>{phone.manufacturer}</Link></td>
+                <td><Link to="addMobilePhone" params={{phoneId: phone.id}}>{phone.id}</Link></td>
+                <td><Link to="addMobilePhone" params={{phoneId: phone.id}}>{phone.manufacturer}</Link></td>
               </tr>
           );
         };

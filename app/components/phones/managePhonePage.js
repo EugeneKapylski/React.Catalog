@@ -4,11 +4,29 @@
 "use strict";
 
 var React = require('react');
+var PhoneForm = require('./phoneForm');
 
 var ManagePhonePage = React.createClass({
+    getInitialState: function() {
+        return {
+            phone: {
+                id: '',
+                manufacturer: ''
+            }
+        };
+    },
+    setPhoneState: function(event) {
+        var field = event.target.name;
+        var value = event.target.value;
+        this.state.phone[field] = value;
+
+        return this.setState({phone: this.state.phone});
+    },
     render: function() {
         return (
-            <h1>Manage mobile phones</h1>
+            <PhoneForm
+                phone={this.state.phone}
+                onChange={this.setPhoneState} />
         );
     }
 });

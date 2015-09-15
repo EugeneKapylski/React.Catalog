@@ -4,10 +4,12 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 var PhoneApi = require('../../api/phoneApi');
 var PhoneList = require('./phoneList');
 
-var Phones = React.createClass({
+var PhonePage = React.createClass({
     getInitialState: function() {
         return {
             phones: []
@@ -17,6 +19,7 @@ var Phones = React.createClass({
         return (
             <div>
                 <h1>Phones</h1>
+                <Link to="addMobilePhone" className="btn btn-default">Add mobile phone</Link>
                 <PhoneList phones = {this.state.phones}/>
             </div>
         );
@@ -28,4 +31,4 @@ var Phones = React.createClass({
     }
 });
 
-module.exports = Phones;
+module.exports = PhonePage;

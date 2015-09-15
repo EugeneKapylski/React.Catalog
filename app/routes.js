@@ -15,7 +15,7 @@ var routes = (
     <Route name="app" path="/" handler={require('./components/app')}>
         <DefaultRoute handler={require('./components/homePage')}/>
         <Route name="phones" handler={require('./components/phones/phonePage')}/>
-        <Route name="phone" handler={require('./components/phones/phonePage')}/>
+        <Route name="addMobilePhone" path="phone" handler={require('./components/phones/managePhonePage')}/>
         <NotFoundRoute handler={require('./components/notFoundPage')}/>
         <Redirect from="mobile-phones" to="phones" />
     </Route>

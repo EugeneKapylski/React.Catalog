@@ -6,28 +6,33 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
-var PhoneApi = require('../../api/phoneApi');
+//var PhoneActions = require('../../actions/phoneActions');
+var PhoneStore = require('../../stores/phoneStore');
 var PhoneList = require('./phoneList');
 
 var PhonePage = React.createClass({
     getInitialState: function() {
         return {
-            phones: []
+            phoneItems: PhoneStore.getAllPhoneItems()
         };
+    },
+    componentWillMount: function() {
+        PhoneStore.addChangeListener(this._onChange);
+    },
+    componentWillUnmount: function() {
+        PhoneStore.removeChangeListener(this._onChange);
+    },
+    _onChange: function() {
+        this.setState({phoneItems: PhoneStore.getAllPhoneItems()})
     },
     render: function() {
         return (
             <div>
                 <h1>Phones</h1>
                 <Link to="addMobilePhone" className="btn btn-default">Add mobile phone</Link>
-                <PhoneList phones = {this.state.phones}/>
+                <PhoneList phoneItems = {this.state.phoneItems}/>
             </div>
         );
-    },
-    componentDidMount: function() {
-        if(this.isMounted()) {
-            this.setState({phones: PhoneApi.getAllPhones() });
-        }
     }
 });
 

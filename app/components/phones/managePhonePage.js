@@ -6,7 +6,8 @@
 var React = require('react');
 var Router = require('react-router');
 var PhoneForm = require('./phoneForm');
-var PhoneApi = require('../../api/phoneApi');
+var PhoneActions = require('../../actions/phoneActions');
+var PhoneStore = require('../../stores/phoneStore');
 var toastr = require('toastr');
 
 var ManagePhonePage = React.createClass({
@@ -34,7 +35,7 @@ var ManagePhonePage = React.createClass({
         var phoneId = this.props.params.id;//from the path '/phone:id'
 
         if(phoneId) {
-            this.setState({phoneItem: PhoneApi.getPhoneById(parseInt(phoneId, 10))});
+            this.setState({phoneItem: PhoneStore.getPhoneItemById(parseInt(phoneId, 10))});
         }
     },
     setPhoneState: function(event) {
@@ -64,9 +65,13 @@ var ManagePhonePage = React.createClass({
             return;
         }
 
-        PhoneApi.savePhone(this.state.phoneItem);
+        if(this.state.phoneItem.id) {
+            PhoneActions.updatePhoneItem(this.state.phoneItem);
+        } else {
+            PhoneActions.createPhoneItem(this.state.phoneItem);
+        }
         this.setState({dirty: false});
-        toastr.success("Phone item saves");
+        toastr.success("Phone item saved");
         this.transitionTo('phones');
     },
     render: function() {
